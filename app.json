@@ -1,27 +1,44 @@
 {
   "expo": {
-    "name": "CurrencyConverter",
+    "plugins":[
+      ["expo-build-properties", {
+        "android":{
+          "enableShrinkResources": true,
+          "enableProguardInReleaseBuilds":true
+        },
+        "ios":{
+          
+        }
+      }]
+    ],
+    "name": "VicIbk Currency Converter & Rates",
     "slug": "CurrencyConverter",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/FreeVector-Dollar-Sign.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#5544ff"
     },
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "foregroundImage": "./assets/FreeVector-Dollar-Sign.png",
+        "backgroundColor": "#5544ff"
+      },
+      "package": "com.victoribk.CurrencyConverter"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/FreeVector-Dollar-Sign.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f3b5e5d5-5505-4e21-98e0-f5a0450fc03b"
+      }
     }
   }
 }
