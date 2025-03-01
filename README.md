@@ -46,6 +46,11 @@ npx expo start
 - **Auto-updating exchange rates** – Fetch and update rates automatically.
 - **Save Favorite Currencies** – Quickly access frequently used conversions.
 
+## Contact
+
+- **GitHub**: [@VictorIBK123](https://github.com/VictorIBK123)
+- **Email**: ibukunogundipe2@gmail.com
+- **Whatsapp**: [wa.link/k7uomi](wa.link/k7uomi)
 ---
 Stay tuned for more updates! 🚀
 
