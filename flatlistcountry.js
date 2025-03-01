@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useContext} from "react";
-import { FlatList, View, Text, TouchableHighlight } from "react-native";
+import { FlatList, View, Text, TouchableHighlight, TextInput } from "react-native";
 import CountryFlag from "react-native-country-flag";
 import { myContext } from "./myContext";
 import { countriesDetails } from "./countryDetails";
@@ -28,10 +28,10 @@ export function FlatListCountry({prop}){
                             <CountryFlag isoCode={item.countryAbr.slice(0,item.countryAbr.length-1).toLowerCase()} size={20} style={{borderRadius: 50}} />
                         </View>
                         <View>
-                            <Text style={{paddingLeft: 15, color: 'white', }}>{item.countryName}</Text>
+                            <Text style={{paddingLeft: 15, color: 'black', }}>{item.countryName}</Text>
                         </View>
                         <View>
-                            <Text style={{paddingLeft:5, color: 'yellow'}}>({item.countryAbr})</Text>
+                            <Text style={{paddingLeft:5, color: 'blue'}}>({item.countryAbr})</Text>
                         </View>
                     </View>
                 </TouchableHighlight>

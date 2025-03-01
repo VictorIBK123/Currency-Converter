@@ -110,21 +110,21 @@ export const styles = StyleSheet.create({
     },
     currencies:{
       position: 'absolute',
-      backgroundColor: 'blue',
+      backgroundColor: '#ffffff',
       borderRadius:10,
       marginHorizontal:5,
-      padding:10
+      padding:10,
+      elevation:10
     },
     baseCurrencyView:{
       flexDirection: 'row', 
       alignItems: 'center', 
-      flex: 2/10
+      flex: 1/10
     },
     ratesView:{
-      backgroundColor: 'blue',
-      flex:7/10,
+      backgroundColor: '',
+      flex:8/10,
       borderRadius: 7,
-      borderWidth:1,
       borderColor: 'blue',
     },
     allRatesView:{ 
@@ -133,9 +133,8 @@ export const styles = StyleSheet.create({
     },
     rateTextView:{
       flex:0.1, 
-      backgroundColor: 'blue',
     },
     rateText:{
-      color: 'white',
+      color: 'black',
     }
   })

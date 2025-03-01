@@ -79,13 +79,13 @@ useEffect(()=>{
       <StatusBar backgroundColor={'black'} hidden={false}/>
       {componentShown && !showMain && <ChooseDefaultCurrency />}
       {componentShown && showMain && <NavigationContainer>
-        <Tab.Navigator initialRouteName='ConvertTab'  tabBarPosition="bottom" screenOptions={{tabBarActiveTintColor: '#55ff55',tabBarInactiveTintColor: '#ffcccc',tabBarLabelStyle:{fontSize: 13}, tabBarStyle:{height:60,backgroundColor: '#224466'}, }}>
+        <Tab.Navigator initialRouteName='ConvertTab' tabBarPosition="bottom" screenOptions={{tabBarIndicatorStyle:{backgroundColor:'blue', width:'40%', height:'90%', marginBottom:'5%', borderRadius:5, marginHorizontal:20}, tabBarActiveTintColor: 'white',tabBarInactiveTintColor: 'blue',tabBarLabelStyle:{fontSize: 13}, tabBarStyle:{height:60,backgroundColor:'#0000ff22'}, }}>
           <Tab.Screen 
           name='ConvertTab' 
           component={ConvertTab}
           options={{tabBarIcon: ({ color})=>{
             return(<FontAwesome name="exchange" size={20} color={color} />)
-          }, title: 'Convert', tabBarIndicatorStyle: {opacity:1,},}}
+          }, title: 'Convert',}}
           
           />
           <Tab.Screen 

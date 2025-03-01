@@ -27,13 +27,13 @@ export default function Rates (){
         setDisabled(!false)
     }
     return(
-        <View style={{flex:1, paddingHorizontal:4, backgroundColor:'blue'}}>
-            <View style={{flex:1/10, justifyContent: 'center', alignItems:'center'}}><Text style={{color: 'white', fontWeight: 'bold', fontSize: 20,textDecorationLine:'underline'}}>Exchange Rates</Text></View>
+        <View style={{flex:1, paddingHorizontal:4, backgroundColor: '#0000ff22'}}>
+            <View style={{flex:1/10, justifyContent: 'center', alignItems:'center'}}><Text style={{color: 'blue', fontWeight: 'bold', fontSize: 20,textDecorationLine:'underline'}}>Exchange Rates</Text></View>
             <View style={styles.baseCurrencyView}>
-                <Text style={{color: 'white'}}>Base Currency: </Text>
-                <TouchableOpacity  onPress={baseCurrencyChooseHandler} style={{flexDirection: 'row',  alignItems: 'center', paddingLeft:5, backgroundColor: '#6666ff', borderRadius:3, padding:3 }}>
-                    <Text style={{color: 'white'}}>1 {baseCurrency.country} ({baseCurrency.countryAbbr}) </Text>
-                    <AntDesign name="down" size={14} color="white" />
+                <Text style={{color: 'black'}}>Base Currency: </Text>
+                <TouchableOpacity  onPress={baseCurrencyChooseHandler} style={{flexDirection: 'row',  alignItems: 'center', paddingLeft:5,  borderRadius:3, padding:3 }}>
+                    <Text style={{color: 'black'}}>1 {baseCurrency.country} ({baseCurrency.countryAbbr}) </Text>
+                    <AntDesign name="down" size={14} color="black" />
                 </TouchableOpacity>
             </View>
             <View style={styles.ratesView}>
@@ -46,10 +46,10 @@ export default function Rates (){
                             {return(
                             <TouchableOpacity onPress={()=>{baseCurrencySelectedHandler(item.countryName,item.countryAbr,  )}} disabled={disabled} style={(()=>{
                                 if (index%2==0){
-                                    return ({backgroundColor: '#0000ff',flex:1, padding:7, })
+                                    return ({backgroundColor: '#ffffff',flex:1, padding:7, })
                                 }
                                 else {
-                                    return ( {backgroundColor: '#6666ff', flex:1,  padding:7})
+                                    return ( { flex:1,  padding:7})
                                 }
                             })()}>
                                 <View  style={{flexDirection: 'row', marginVertical:5, flex:1,alignItems: 'center' }}>
@@ -58,19 +58,19 @@ export default function Rates (){
                                             <CountryFlag isoCode={item.countryAbr.slice(0,item.countryAbr.length-1).toLowerCase()} size={20} style={{borderRadius: 50}} />
                                         </View>
                                         <View>
-                                            <Text style={{paddingLeft: 10, color: 'white',fontSize:13}}>{item.countryName}</Text>
+                                            <Text style={{paddingLeft: 10, color: 'black',fontSize:13,}}>{item.countryName}</Text>
                                         </View>
                                         <View>
-                                            <Text style={{paddingLeft:5, color: 'white'}}>({item.countryAbr})</Text>
+                                            <Text style={{paddingLeft:5, color: 'black', }}>({item.countryAbr})</Text>
                                         </View>
                                     </View>
                                     <View style={{flex:0.25}}>
                                         {disabled && <Text style={(()=>{
                                 if (index%2==0){
-                                    return ({color: '#55ff55'})
+                                    return ({color: 'green'})
                                 }
                                 else {
-                                    return ( {color: '#ffcccc'})
+                                    return ( {color: 'blue'})
                                 }
                             })()}>{(1/rates[baseCurrency.countryAbbr])*item.rate}</Text>}
                             {!disabled && 
