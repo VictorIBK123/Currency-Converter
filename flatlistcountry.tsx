@@ -15,6 +15,11 @@ export function FlatListCountry({prop}){
     } ,[])
     return (
             <FlatList 
+            ListHeaderComponent={()=>(
+                <View style={{ }}>
+                    <TextInput style={{paddingBottom:8,borderRadius:5,borderColor:'#ffffff', paddingVertical:10}} inputMode='search' />
+                </View>
+            )}
             keyExtractor={(item)=>(item.key)}
             data ={data}
             renderItem={({item})=>(

@@ -105,6 +105,20 @@ export default function ConvertTab() {
       }
     }
   }
+  const amountInputClicked =(param: string)=>{
+    if (param=='countryAmount'){
+      changeVisibility(); 
+    setClicked('amount'); 
+    setConvertingCurrency(countryAmount); 
+    setClickedN('amount')
+    }
+    else{
+      changeVisibility(); 
+      setClicked('convertedAmount'); 
+      setConvertingCurrency(countryConvertedAmount);
+      setClickedN('convertedAmount')
+    }
+  }
   return(
       <Pressable onPress={()=>{setListVisible1(false);setListVisible2(false);setIsVisible(false);setClicked(null)}} style={{flex:1, backgroundColor: '#0000ff22'}}>
         {/* The view below is the container of all component on this screen */}
@@ -143,7 +157,7 @@ export default function ConvertTab() {
                   {/* This is the component for entering the currency value */}
                   <View style={styles.textInputContainer}>
                     <Pressable disabled={listVisible1 || listVisible2}
-                    onPress={()=>{changeVisibility(); setClicked('amount'); setConvertingCurrency(countryAmount); setClickedN('amount')}} 
+                    onPress={()=>{amountInputClicked('countryAmount')}} 
                     style={(()=>{
                       if (clicked === 'amount'){
                         return([styles.textInput, {backgroundColor: '#0000ff55'}])
@@ -184,7 +198,7 @@ export default function ConvertTab() {
                   </TouchableOpacity>
                   {/* This consists the component for entering the currency value */}
                   <View style={styles.textInputContainer}>
-                    <Pressable disabled={listVisible1 || listVisible2} onPress={()=>{changeVisibility(); setClicked('convertedAmount'); setConvertingCurrency(countryConvertedAmount);setClickedN('convertedAmount')}} 
+                    <Pressable disabled={listVisible1 || listVisible2} onPress={()=>{amountInputClicked('countryConvertedAmount')}} 
                     style={(()=>{
                       if (clicked === 'convertedAmount'){
                         return([styles.textInput, {backgroundColor: '#0000ff55'}])
