@@ -23,12 +23,22 @@
       "backgroundColor": "#5544ff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "splash": {
+          "image": "./assets/splash.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#5544ff"
+          }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/FreeVector-Dollar-Sign.png",
-        "backgroundColor": "#5544ff"
+        "backgroundColor": "#5544ff",
+        "splash": {
+          "image": "./assets/splash.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#5544ff"
+          }
       },
       "package": "com.victoribk.CurrencyConverter"
     },

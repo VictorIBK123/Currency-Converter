@@ -1,16 +1,15 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, {useState, useEffect, useContext, memo} from "react";
 import { View, Text, FlatList, TouchableOpacity ,useWindowDimensions} from "react-native";
 import { AntDesign,FontAwesome5,MaterialIcons } from '@expo/vector-icons';
 import CountryFlag from "react-native-country-flag";
-import { countriesDetails } from "./countryDetails";
-import { styles } from "./myStyles";
-import { myContext } from "./myContext";
-export default function Rates (){
+import { countriesDetails } from "../data/countryDetails";
+import { styles } from "../myStyles";
+import { RatesContext } from "../myContext";
+const Rates =()=>{
     const [baseCurrency, setBaseCurrency] = useState({country:'United States Dollar', countryAbbr: 'USD'})
     const [data, setData] =useState(null)
-    const {rates} = useContext(myContext)
+    const {rates} = useContext(RatesContext)
     const [disabled, setDisabled] = useState(true)
-    const [thisRate, setThisRate] = useState(null)
     useEffect(()=>{
         let keys = Object.keys(countriesDetails)
         let values = Object.values(countriesDetails)
@@ -19,34 +18,30 @@ export default function Rates (){
             return({countryAbr: element, countryName: values[index],rate:rateList[index], key: values[index]})
         }))
     } ,[rates])
-    const baseCurrencyChooseHandler =()=>{
-        setDisabled(!disabled)
-    }
-    const baseCurrencySelectedHandler =(countryName, countryAbbr,rate)=>{
+    const baseCurrencySelectedHandler =(countryName: any, countryAbbr: any)=>{
         setBaseCurrency({country: countryName, countryAbbr: countryAbbr})
-        setDisabled(!false)
     }
     return(
         <View style={{flex:1, paddingHorizontal:4, backgroundColor: '#0000ff22'}}>
             <View style={{flex:1/10, justifyContent: 'center', alignItems:'center'}}><Text style={{color: 'blue', fontWeight: 'bold', fontSize: 20,textDecorationLine:'underline'}}>Exchange Rates</Text></View>
             <View style={styles.baseCurrencyView}>
                 <Text style={{color: 'black'}}>Base Currency: </Text>
-                <TouchableOpacity  onPress={baseCurrencyChooseHandler} style={{flexDirection: 'row',  alignItems: 'center', paddingLeft:5,  borderRadius:3, padding:3 }}>
+                <View   style={{flexDirection: 'row',  alignItems: 'center', paddingLeft:5,  borderRadius:3, padding:3 }}>
                     <Text style={{color: 'black'}}>1 {baseCurrency.country} ({baseCurrency.countryAbbr}) </Text>
-                    <AntDesign name="down" size={14} color="black" />
-                </TouchableOpacity>
+                </View>
             </View>
             <View style={styles.ratesView}>
-                <View style={styles.rateTextView}><Text style={styles.rateText}>Latest Rates</Text></View>
+                <View style={styles.rateTextView}><Text style={styles.rateText}>Latest Rates </Text>
+                <Text style={{fontSize:12, color:'#555555'}}>Click on any currency to make as base</Text></View>
                 <View style={styles.allRatesView}>
                     <FlatList 
                         keyExtractor={(item)=>(item.key)}
                         data ={data}
                         renderItem={({item,index})=>{if(item.countryAbr!=baseCurrency.countryAbbr) 
                             {return(
-                            <TouchableOpacity onPress={()=>{baseCurrencySelectedHandler(item.countryName,item.countryAbr,  )}} disabled={disabled} style={(()=>{
+                            <TouchableOpacity onPress={()=>{baseCurrencySelectedHandler(item.countryName,item.countryAbr,  )}} style={(()=>{
                                 if (index%2==0){
-                                    return ({backgroundColor: '#ffffff',flex:1, padding:7, })
+                                    return ({backgroundColor: '#ffffff77',flex:1, padding:7, })
                                 }
                                 else {
                                     return ( { flex:1,  padding:7})
@@ -58,7 +53,7 @@ export default function Rates (){
                                             <CountryFlag isoCode={item.countryAbr.slice(0,item.countryAbr.length-1).toLowerCase()} size={20} style={{borderRadius: 50}} />
                                         </View>
                                         <View>
-                                            <Text style={{paddingLeft: 10, color: 'black',fontSize:13,}}>{item.countryName}</Text>
+                                            <Text style={{ paddingLeft: 10, color: 'black',fontSize:13,}}>{item.countryName}</Text>
                                         </View>
                                         <View>
                                             <Text style={{paddingLeft:5, color: 'black', }}>({item.countryAbr})</Text>
@@ -87,3 +82,4 @@ export default function Rates (){
         </View>
     )
 }
+export default memo(Rates)

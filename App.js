@@ -1,13 +1,13 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { NavigationContainer } from "@react-navigation/native";
-import Rates from "./RatesTab";
+import Rates from "./screens/RatesTab";
 import { ActivityIndicator, Button, StatusBar, Text, View } from "react-native";
-import ConvertTab from "./ConvertTab";
+import ConvertTab from "./screens/ConvertTab";
 import React, { useState, useEffect} from "react";
 import { MaterialIcons,FontAwesome } from '@expo/vector-icons';
-import { myContext } from "./myContext";
+import { ClickedNContext, ConvertingCurrencyContext, CountryAmountContext, CountryConvertedAmountContext, CurrencySelectedContext, IsoCodeAmountContext, IsoCodeConvertedAmountContext, ListVisible1Context, ListVisible2Context, myContext, RatesContext, ShowMainContext } from "./myContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import ChooseDefaultCurrency from "./ChooseDefaultCurrency";
+import ChooseDefaultCurrency from "./screens/ChooseDefaultCurrency";
 
 export default function App(){
   const [activityIndicator, setActivityIndicator] = useState(true)
@@ -67,43 +67,95 @@ useEffect(()=>{
   .catch((error)=>{setComponentShown(false);setActivityIndicator(false)})
 },[internetConnection])
   const Tab = createMaterialTopTabNavigator()
-  
   if (activityIndicator=== true){
     return (<View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
       <ActivityIndicator size='large' color={'blue'} />
     </View>)
   }
   else {
-  return(
-    <myContext.Provider value={{setShowMain,clickedN, setClickedN,countryConvertedAmount, setCountryConvertedAmount,isoCodeConvertedAmount, setisoCodeConvertedAmount,countryAmount, setCountryAmount,isoCodeAmount, setIsocodeAmount,currencySelected,listVisible1, setListVisible1,listVisible2,setListVisible2,convertingCurrency, setConvertingCurrency,setRates, rates}}>
-      <StatusBar backgroundColor={'black'} hidden={false}/>
-      {componentShown && !showMain && <ChooseDefaultCurrency />}
-      {componentShown && showMain && <NavigationContainer>
-        <Tab.Navigator initialRouteName='ConvertTab' tabBarPosition="bottom" screenOptions={{tabBarIndicatorStyle:{backgroundColor:'blue', width:'40%', height:'90%', marginBottom:'5%', borderRadius:5, marginHorizontal:20}, tabBarActiveTintColor: 'white',tabBarInactiveTintColor: 'blue',tabBarLabelStyle:{fontSize: 13}, tabBarStyle:{height:60,backgroundColor:'#0000ff22'}, }}>
-          <Tab.Screen 
-          name='ConvertTab' 
-          component={ConvertTab}
-          options={{tabBarIcon: ({ color})=>{
-            return(<FontAwesome name="exchange" size={20} color={color} />)
-          }, title: 'Convert',}}
-          
-          />
-          <Tab.Screen 
-          name='RatesTab' 
-          component={Rates}
-          options={{tabBarIcon:({ color})=>{
-            return ((<MaterialIcons name="currency-exchange" size={20} color={color} />))
-          }, title:'Rates'}}
-          />
-        </Tab.Navigator>
-      </NavigationContainer>}
-      {!componentShown && 
-      <View>
-        <Text style={{fontSize: 18, padding: 8}}>Network Error: Make Sure you turn on your internet connection</Text>
-        <View style={{flexDirection: 'row-reverse', padding: 8}}>
-          <Button onPress={()=>{setInternetConnection(!internetConnection); setActivityIndicator(true)}} title="Refresh"/>
-        </View>
-      </View>}
-    </myContext.Provider>
-  )}
+  return (
+    <IsoCodeAmountContext.Provider value={{isoCodeAmount, setIsocodeAmount}}>
+    <CountryAmountContext.Provider value={{countryAmount, setCountryAmount}}>
+    <IsoCodeConvertedAmountContext.Provider value={{ isoCodeConvertedAmount, setisoCodeConvertedAmount }}>
+      <CountryConvertedAmountContext.Provider value={{ countryConvertedAmount, setCountryConvertedAmount }}>
+        <ClickedNContext.Provider value={{ clickedN, setClickedN }}>
+          <CurrencySelectedContext.Provider value={{ currencySelected }}>
+            <ListVisible1Context.Provider value={{ listVisible1, setListVisible1 }}>
+              <ListVisible2Context.Provider value={{ listVisible2, setListVisible2 }}>
+                <ConvertingCurrencyContext.Provider value={{ convertingCurrency, setConvertingCurrency }}>
+                  <RatesContext.Provider value={{ rates, setRates }}>
+                    <ShowMainContext.Provider value={{showMain, setShowMain}}>
+                    <StatusBar backgroundColor={'black'} hidden={false} />
+                    {componentShown && !showMain && <ChooseDefaultCurrency />}
+                    {componentShown && showMain && (
+                      <NavigationContainer>
+                        <Tab.Navigator
+                          initialRouteName="ConvertTab"
+                          tabBarPosition="bottom"
+                          screenOptions={{
+                            tabBarIndicatorStyle: {
+                              backgroundColor: 'blue',
+                              width: '40%',
+                              height: '90%',
+                              marginBottom: '5%',
+                              borderRadius: 5,
+                              marginHorizontal: 20,
+                            },
+                            tabBarActiveTintColor: 'white',
+                            tabBarInactiveTintColor: 'blue',
+                            tabBarLabelStyle: { fontSize: 13 },
+                            tabBarStyle: { height: 60, backgroundColor: '#0000ff22' },
+                          }}
+                        >
+                          <Tab.Screen
+                            name="ConvertTab"
+                            component={ConvertTab}
+                            options={{
+                              tabBarIcon: ({ color }) => {
+                                return <FontAwesome name="exchange" size={20} color={color} />;
+                              },
+                              title: 'Convert',
+                            }}
+                          />
+                          <Tab.Screen
+                            name="RatesTab"
+                            component={Rates}
+                            options={{
+                              tabBarIcon: ({ color }) => {
+                                return <MaterialIcons name="currency-exchange" size={20} color={color} />;
+                              },
+                              title: 'Rates',
+                            }}
+                          />
+                        </Tab.Navigator>
+                      </NavigationContainer>
+                    )}
+                    {!componentShown && (
+                      <View>
+                        <Text style={{ fontSize: 18, padding: 8 }}>
+                          Network Error: Make Sure you turn on your internet connection
+                        </Text>
+                        <View style={{ flexDirection: 'row-reverse', padding: 8 }}>
+                          <Button
+                            onPress={() => {
+                              setInternetConnection(!internetConnection);
+                              setActivityIndicator(true);
+                            }}
+                            title="Refresh"
+                          />
+                        </View>
+                      </View>
+                    )}
+                    </ShowMainContext.Provider>
+                  </RatesContext.Provider>
+                </ConvertingCurrencyContext.Provider>
+              </ListVisible2Context.Provider>
+            </ListVisible1Context.Provider>
+          </CurrencySelectedContext.Provider>
+        </ClickedNContext.Provider>
+      </CountryConvertedAmountContext.Provider>
+    </IsoCodeConvertedAmountContext.Provider>
+    </CountryAmountContext.Provider >
+    </IsoCodeAmountContext.Provider>
+  );}
 }

@@ -1,11 +1,16 @@
 import React, {useEffect, useState, useContext } from "react";
 import { TouchableOpacity, View, Text, FlatList, TouchableHighlight, Pressable,  } from "react-native";
-import { myContext } from "./myContext";
 import CountryFlag from "react-native-country-flag";
-import { countriesDetails } from "./countryDetails";
+import { countriesDetails } from "../data/countryDetails";
 import { AntDesign } from '@expo/vector-icons';
+import { ConvertingCurrencyContext, CountryAmountContext, CountryConvertedAmountContext, IsoCodeAmountContext, IsoCodeConvertedAmountContext, ShowMainContext } from "../myContext";
 export default function ChooseDefaultCurrency (){
-    const { setShowMain, setCountryConvertedAmount, setisoCodeConvertedAmount, setCountryAmount, setIsocodeAmount,setConvertingCurrency} = useContext(myContext)
+    const { setShowMain, }= useContext(ShowMainContext)
+    const {setCountryConvertedAmount,} = useContext(CountryConvertedAmountContext)
+    const { setisoCodeConvertedAmount,} = useContext(IsoCodeConvertedAmountContext)
+    const {setCountryAmount,} = useContext(CountryAmountContext) 
+    const {setIsocodeAmount,} = useContext(IsoCodeAmountContext)
+    const {setConvertingCurrency} = useContext(ConvertingCurrencyContext)
     const [isVisible, setIsVisible] = useState(false)
     const [data, setData] = useState(null)
     const [defaultValue, setDefaultValue] = useState(null)
@@ -97,7 +102,7 @@ export default function ChooseDefaultCurrency (){
                         </View>
                 </View>
             </View>
-            <TouchableOpacity disabled={disabled} onPress={handleSubmit} underlayColor={'blue'} style={{flexDirection: 'row-reverse', marginTop: 40, marginHorizontal:'10%', }}>
+            <TouchableOpacity disabled={disabled} onPress={handleSubmit} style={{flexDirection: 'row-reverse', marginTop: 40, marginHorizontal:'10%', }}>
                 <Text style={{fontSize:20, color: 'blue', backgroundColor: 'white', borderColor: 'blue', borderWidth: 2, borderRadius: 5, paddingHorizontal:20, paddingVertical:4 }}>Next</Text>
             </TouchableOpacity>
             {isVisible && <View style={{position: 'absolute',width: '90%', height: '70%',marginHorizontal: '5%', borderRadius: 10, borderColor: 'green',backgroundColor: 'black' }}><FlatList 
