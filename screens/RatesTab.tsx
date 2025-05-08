@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useContext, memo} from "react";
 import { View, Text, FlatList, TouchableOpacity ,useWindowDimensions} from "react-native";
-import { AntDesign,FontAwesome5,MaterialIcons } from '@expo/vector-icons';
+import {FontAwesome5 } from '@expo/vector-icons';
 import CountryFlag from "react-native-country-flag";
 import { countriesDetails } from "../data/countryDetails";
 import { styles } from "../myStyles";

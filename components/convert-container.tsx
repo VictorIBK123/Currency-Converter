@@ -1,8 +1,6 @@
-import { View, Text, TouchableOpacity, TextInput, ScrollView, Pressable } from "react-native";
+import { View } from "react-native";
 import React, { Dispatch, memo, SetStateAction } from "react";
 import { styles } from "../myStyles";
-import { AntDesign } from '@expo/vector-icons';
-import CountryFlag from "react-native-country-flag";
 import MainConverterComponent1 from './main-converter1'
 import MainConverterComponent2 from './main-converter2'
 import BorderLine  from "./border-line";

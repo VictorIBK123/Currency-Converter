@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, TextInput, ScrollView, Pressable } from "react-native";
-import React, { Dispatch, memo, SetStateAction } from "react";
-import { styles } from '/home/victor-ibk/Programming/ReactNativeProjects/Currency-Converter/myStyles.js'
+import React, { Dispatch, SetStateAction } from "react";
+import { styles } from "../myStyles";
 import { AntDesign } from '@expo/vector-icons';
 import CountryFlag from "react-native-country-flag";
 interface Props{

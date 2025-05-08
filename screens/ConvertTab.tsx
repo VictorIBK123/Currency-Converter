@@ -1,11 +1,9 @@
 import React, {useState, useRef, useEffect,useContext, useCallback } from "react";
 import {View, Text, StyleSheet, TouchableHighlight, TextInput, TouchableOpacity, Pressable, TouchableWithoutFeedback, ScrollView} from "react-native";
-import { AntDesign } from '@expo/vector-icons';
 
 import { styles } from "../myStyles";
 import { useWindowDimensions } from "react-native";
 import FlatListCountry from "../components/flatlistcountry";
-import CountryFlag from "react-native-country-flag";
 import { ClickedNContext, ConvertingCurrencyContext, CountryAmountContext, CountryConvertedAmountContext, CurrencySelectedContext, IsoCodeAmountContext, IsoCodeConvertedAmountContext, ListVisible1Context, ListVisible2Context, RatesContext, ShowMainContext } from "../myContext";
 import Header from '../components/converttabheader'
 import ConvertComponentContainer from '../components/convert-container'
