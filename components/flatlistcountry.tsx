@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext, memo} from "react";
+import React, {useEffect, useState, useContext, memo, useRef, RefObject} from "react";
 import { FlatList, View, Text, TouchableHighlight, TextInput } from "react-native";
 import CountryFlag from "react-native-country-flag";
 import { countriesDetails } from "../data/countryDetails";
@@ -17,6 +17,7 @@ const FlatListCountry = memo(({ prop }: FlatListCountryProps) => {
     const [data, setData] =useState(null)
     const [renderedData, setRenderedData] = useState(data)
     const [searchValue, setSearchValue] = useState<string>('')
+    const textInputRef = useRef<TextInput>()
     useEffect(()=>{
         let keys = Object.keys(countriesDetails)
         let values = Object.values(countriesDetails)
@@ -29,28 +30,34 @@ const FlatListCountry = memo(({ prop }: FlatListCountryProps) => {
     },[data])
     
     return (
+        <View style={{flex:1, }}>
+            <ListHeaderComp setRenderedData={setRenderedData} setSearchValue={setSearchValue} searchValue={searchValue} data={data} />
             <FlatList 
-            ListHeaderComponent={()=>{
-                const searchFunc =(text: string)=>{
-                    setSearchValue(text)
-                    setRenderedData(data.filter((e: { countryName: string ; countryAbr: string ; })=>e.countryName.toLowerCase().includes(text.toLowerCase())||e.countryAbr.toLowerCase().includes(text.toLowerCase())))
-                }
-                return(
-                <View style={{borderWidth:1, borderColor:'blue', borderRadius:20 }}>
-                    <TextInput  value={searchValue} onChangeText={searchFunc} style={{paddingBottom:8,borderRadius:5,borderColor:'#ffffff', paddingVertical:10}} inputMode='search' />
-                </View>)
-            }}
-            ListEmptyComponent={()=><View>
-                <Text>No matched currency</Text>
-            </View>}
-            keyExtractor={(item)=>(item.key)}
-            data ={renderedData}
-            renderItem={({item})=>(
-                <RenderItem item={item} currencySelected={currencySelected} setListVisible1={setListVisible1} setListVisible2={setListVisible2} prop={prop}/>
-            )
-                }
-            />
+                style={{flex:9/10}}
+                ListEmptyComponent={()=><View>
+                    <Text>No matched currency</Text>
+                </View>}
+                keyExtractor={(item)=>(item.key)}
+                data ={renderedData}
+                renderItem={({item})=>(
+                    <RenderItem item={item} textInputRef={textInputRef} currencySelected={currencySelected} setListVisible1={setListVisible1} setListVisible2={setListVisible2} prop={prop}/>
+                )
+                    }
+                />
+        </View>
+            
     )})
+const ListHeaderComp:React.FC<any> =memo(({setRenderedData,setSearchValue, searchValue, data})=>{
+            
+    const searchFunc =(text: string)=>{
+        setSearchValue(text)
+        setRenderedData(data.filter((e: { countryName: string ; countryAbr: string ; })=>e.countryName.toLowerCase().includes(text.toLowerCase())||e.countryAbr.toLowerCase().includes(text.toLowerCase())))
+    }
+    return(
+    <View style={{borderWidth:1, borderColor:'blue', borderRadius:20, flex:1/10, paddingHorizontal:10 }}>
+        <TextInput  placeholder="Search e.g. NGN" value={searchValue}  onChangeText={searchFunc} style={{borderRadius:5,borderColor:'#ffffff', paddingVertical:2, flex:1}} inputMode='search' />
+    </View>)
+})
 interface RenderItemProps {
     item: {
         countryAbr: string;
@@ -60,13 +67,15 @@ interface RenderItemProps {
     currencySelected: (prop: any, isoCode: string, countryAbr: string) => void;
     setListVisible1: React.Dispatch<React.SetStateAction<boolean>>;
     setListVisible2: React.Dispatch<React.SetStateAction<boolean>>;
-    prop: any; // Replace 'any' with the specific type if known
+    prop: any; // Replace 'any' with the specific type if known,
+    textInputRef: RefObject<TextInput>
 }
 
-const RenderItem: React.FC<RenderItemProps> = memo(({ item, currencySelected, setListVisible1, setListVisible2, prop }) => {
+const RenderItem: React.FC<RenderItemProps> = memo(({textInputRef, item, currencySelected, setListVisible1, setListVisible2, prop }) => {
     return (
         <TouchableHighlight
             onPress={() => {
+                
                 currencySelected(prop, item.countryAbr.slice(0, item.countryAbr.length - 1).toLowerCase(), item.countryAbr);
                 setListVisible1(false);
                 setListVisible2(false);

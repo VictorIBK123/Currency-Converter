@@ -62,48 +62,48 @@ export default function ChooseDefaultCurrency (){
             <View style={{marginBottom: 20, alignItems: 'center'}}>
                 <Text style={{color: '#000088', fontWeight: 'bold', fontSize: 24}}>Default Currencies</Text>
             </View>
-            <View style={{ backgroundColor: 'blue', marginHorizontal: '10%', padding:8, borderRadius:8, height: 250, justifyContent: 'center'}}>
-                <View style={{marginVertical:15, backgroundColor: 'white',borderRadius:5, padding: 5, flex:0.4, justifyContent: 'space-evenly'}}>
+            <View style={{  marginHorizontal: '10%', padding:8, width:'90%',alignSelf:'center', paddingHorizontal:15, borderRadius:8, height: 230, justifyContent: 'center', elevation:3}}>
+                <View style={{marginVertical:10, borderRadius:5, padding: 5, flex:0.4, justifyContent: 'space-evenly'}}>
                     <TouchableOpacity onPress={()=>{pressHandler('defaultCurrency')}}>
-                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                            <Text style={{color: 'blue', marginRight: 5}}>Select Your Default Currency</Text>
-                            <AntDesign name="down" size={14} color="blue" />
+                        <View  style={{flexDirection: 'row', alignItems: 'center',}}>
+                            <Text style={{color: 'black', marginRight: 5}}>Select Your Default Currency</Text>
+                            <AntDesign name="down" size={14} color="black" />
                         </View>
-                    </TouchableOpacity>
-                        <View style={{flexDirection: 'row', }}>
+                    </TouchableOpacity >
+                        <View style={{flexDirection: 'row',backgroundColor:'white', elevation:10, borderRadius:8, padding:5, marginTop:5 }}>
                             <View>
                                 <CountryFlag isoCode={isoCodeDefaultCurrency} size={20} style={{borderRadius: 50}} />
                             </View>
                             <View>
-                                <Text style={{paddingLeft: 10, color: 'blue',fontSize:14}}>{countryNameDefaultCurrency}</Text>
+                                <Text style={{paddingLeft: 10, color: 'black',fontSize:14}}>{countryNameDefaultCurrency}</Text>
                             </View>
                             <View>
-                                <Text style={{paddingLeft:5, color: 'blue'}}>{countryAbrDefaultCurrency}</Text>
+                                <Text style={{paddingLeft:5, color: 'black'}}>{countryAbrDefaultCurrency}</Text>
                             </View>
                         </View>
                 </View>
-                <View style={{marginVertical:15, backgroundColor: 'white', borderRadius:5, padding: 5, flex:0.4, justifyContent: 'space-evenly'}}>
+                <View style={{marginVertical:5,  borderRadius:5, padding: 5, flex:0.4, justifyContent: 'space-evenly'}}>
                     <TouchableOpacity onPress={()=>{pressHandler('defaultConvert')}}>
                         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                            <Text style={{color: 'blue',  marginRight: 5}}>Convert to Currency</Text>
-                            <AntDesign name="down" size={14} color="blue" />
+                            <Text style={{color: 'black',  marginRight: 5}}>Convert to Currency</Text>
+                            <AntDesign name="down" size={14} color="black" />
                         </View>
                     </TouchableOpacity>
-                        <View style={{flexDirection: 'row'}}>
+                        <View style={{flexDirection: 'row', backgroundColor:'white', elevation:10, borderRadius:8, padding:5, marginTop:5}}>
                             <View>
                                 <CountryFlag isoCode={isoCodeDefaultConvert} size={20} style={{borderRadius: 50}} />
                             </View>
                             <View>
-                                <Text style={{paddingLeft: 10, color: 'blue',fontSize:14}}>{countryNameDefaultConvert}</Text>
+                                <Text style={{paddingLeft: 10, color: 'black',fontSize:14}}>{countryNameDefaultConvert}</Text>
                             </View>
                             <View>
-                                <Text style={{paddingLeft:5, color: 'blue'}}>{countryAbrDefaultConvert}</Text>
+                                <Text style={{paddingLeft:5, color: 'black'}}>{countryAbrDefaultConvert}</Text>
                             </View>
                         </View>
                 </View>
             </View>
             <TouchableOpacity disabled={disabled} onPress={handleSubmit} style={{flexDirection: 'row-reverse', marginTop: 40, marginHorizontal:'10%', }}>
-                <Text style={{fontSize:20, color: 'blue', backgroundColor: 'white', borderColor: 'blue', borderWidth: 2, borderRadius: 5, paddingHorizontal:20, paddingVertical:4 }}>Next</Text>
+                <Text style={{fontSize:20, color: 'blue', backgroundColor: 'white', elevation:5, borderRadius: 5, paddingHorizontal:20, paddingVertical:4 }}>Next</Text>
             </TouchableOpacity>
             {isVisible && <View style={{position: 'absolute',width: '90%', height: '70%',marginHorizontal: '5%', borderRadius: 10, borderColor: 'green',backgroundColor: 'black' }}><FlatList 
                         keyExtractor={(item)=>(item.key)}

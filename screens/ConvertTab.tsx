@@ -170,10 +170,10 @@ export default function ConvertTab() {
             {isVisible &&
               <CalculateButtons addNumber={addNumber} />
             }
-            <View style={[styles.currencies, { height:'85%', zIndex:10, display: listVisible1?"flex":'none' }]}>
+            <View style={[styles.currencies, { height:'85%',width:'95%',alignSelf:'center', zIndex:10, display: listVisible1?"flex":'none' }]}>
               <FlatListCountry prop={"amount"}/>
             </View>
-            <View style={[styles.currencies, { height:'85%', display:listVisible2?'flex':'none' }]}>
+            <View style={[styles.currencies, { height:'85%',width:'95%',alignSelf:'center', display:listVisible2?'flex':'none' }]}>
               <FlatListCountry prop={"convertedAmount"}/>
             </View>
           </View>

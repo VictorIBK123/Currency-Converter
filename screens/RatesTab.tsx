@@ -53,7 +53,7 @@ const Rates =()=>{
                                             <CountryFlag isoCode={item.countryAbr.slice(0,item.countryAbr.length-1).toLowerCase()} size={20} style={{borderRadius: 50}} />
                                         </View>
                                         <View>
-                                            <Text style={{ paddingLeft: 10, color: 'black',fontSize:13,}}>{item.countryName}</Text>
+                                            <Text style={{ paddingLeft: 10, color: 'black',fontSize:13,maxWidth:150}}>{item.countryName}</Text>
                                         </View>
                                         <View>
                                             <Text style={{paddingLeft:5, color: 'black', }}>({item.countryAbr})</Text>
